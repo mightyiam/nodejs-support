@@ -27,6 +27,9 @@
     "make-distribution": "run-s transpile finalize-distribution",
     "finalize-distribution": "copyfiles --verbose package.json package-lock.json README.md lib/main"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@babel/polyfill": "7.0.0",
     "bunyan": "1.8.12",
