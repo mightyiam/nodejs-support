@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # MIT License
 #
@@ -45,8 +45,8 @@ fi
 usage() {
     cat<<EOF
 usage:
-if on $MASTER branch: release dev|rc [chart]
-if on release branch: release major|minor|patch|dev
+if on $MASTER branch: release pre|rc [chart]
+if on release branch: release major|minor|patch|pre
 
 optional supported environment variables:
 
@@ -65,7 +65,7 @@ EOF
 
 RELEASE_LEVEL="$1"
 case "$RELEASE_LEVEL" in
-  major|minor|patch|dev|rc)
+  major|minor|patch|pre|rc)
     # ok
     ;;
   h|he|hel|help)
@@ -74,15 +74,21 @@ case "$RELEASE_LEVEL" in
     ;;
   *)
     if [ -n "$1" ]; then
-      echo "ERROR: specify release level of 'dev', 'patch', 'minor', 'major', or 'rc'" >&2
+      echo "ERROR: specify release level of 'pre', 'patch', 'minor', 'major', or 'rc'" >&2
     fi
     usage
     exit 1
     ;;
 esac
 
-FX="docker run --rm -i matthewadams12/fx fx"
-MATCH="docker run --rm -i matthewadams12/match"
+FX=fx
+if ! which $FX; then
+  FX="docker run --rm -i matthewadams12/$FX $FX"
+fi
+MATCH=match
+if ! which $MATCH; then
+  MATCH="docker run --rm -i matthewadams12/$MATCH"
+fi
 
 PACKAGE_JSON="${PACKAGE_JSON:-package.json}"
 echo "INFO: using package file: $PACKAGE_JSON"
@@ -145,11 +151,11 @@ fi
 
 if [ "$BRANCH" = "$MASTER" ]; then
   case "$RELEASE_LEVEL" in
-    dev|rc)
+    pre|rc)
       # ok
       ;;
     *)
-      echo "ERROR: only 'dev' or 'rc' releases are permitted from the $MASTER branch." >&2
+      echo "ERROR: only 'pre' or 'rc' releases are permitted from the $MASTER branch." >&2
       exit 6
       ;;
   esac
@@ -170,8 +176,8 @@ echo "INFO: ok to proceed with $RELEASE_LEVEL from branch $BRANCH"
 echo "INFO: determining current version from $PACKAGE_JSON"
 
 VERSION="$(getVersion)"
-if ! $MATCH '\-(dev|rc)\.[0-9]{1,}$' "$VERSION"; then
-  echo 'ERROR: repository is in an inconsistent state: version does NOT end in a development suffix!' >&2
+if ! $MATCH '\-(pre|rc)\.[0-9]{1,}$' "$VERSION"; then
+  echo 'ERROR: repository is in an inconsistent state: version does NOT end in a prerelease suffix!' >&2
   exit 3
 fi
 
@@ -204,10 +210,10 @@ applyChanges() {
   echo "$MSG"
 }
 
-if [ "$BRANCH" = "$MASTER" ]; then # this will be either an rc, resulting in a new release branch, or a dev
-  MATCHES="$($MATCH '^([0-9]{1,})\.([0-9]{1,})\.0\-dev\.([0-9]{1,})$' "$VERSION")"
+if [ "$BRANCH" = "$MASTER" ]; then # this will be either an rc, resulting in a new release branch, or a pre
+  MATCHES="$($MATCH '^([0-9]{1,})\.([0-9]{1,})\.0\-pre\.([0-9]{1,})$' "$VERSION")"
   if [ -z "$MATCHES" ]; then
-    echo "ERROR: the version does not match the format of major.minor.0-dev.n required in the $MASTER branch." >&2
+    echo "ERROR: the version does not match the format of major.minor.0-pre.n required in the $MASTER branch." >&2
     exit 8
   else
     echo "INFO: version $VERSION matches expected format for branch $BRANCH"
@@ -239,13 +245,13 @@ if [ "$BRANCH" = "$MASTER" ]; then # this will be either an rc, resulting in a n
       echo "INFO: cherry-picked $NEW_RELEASE_BRANCH rc commit into $MASTER"
 
       # advance master version
-      NEXT_VERSION="$MAJOR.$(($MINOR+1)).0-dev.0"
+      NEXT_VERSION="$MAJOR.$(($MINOR+1)).0-pre.0"
 
       setVersion $NEXT_VERSION $DOCKER_BUILD_STEP_NAMES
 
       applyChanges "bump to $NEXT_VERSION [skip ci]"
 
-      # return to release branch & prepare for next development release
+      # return to release branch & prepare for next prerelease
       git checkout $NEW_RELEASE_BRANCH
       echo "INFO: checked out $NEW_RELEASE_BRANCH"
 
@@ -258,12 +264,12 @@ if [ "$BRANCH" = "$MASTER" ]; then # this will be either an rc, resulting in a n
       exit 0
       ;;
 
-  dev)
+  pre)
       setVersion $VERSION
 
       applyChanges "release $VERSION" $VERSION
 
-      NEXT_VERSION=$MAJOR.$MINOR.$PATCH-dev.$((PRE+1))
+      NEXT_VERSION=$MAJOR.$MINOR.$PATCH-pre.$((PRE+1))
 
       setVersion $NEXT_VERSION
 
