@@ -3,9 +3,11 @@ node_js:
   - '10'
 before_deploy:
   - npm run make-distribution
+  - cd $TRAVIS_BUILD_DIR/lib/main
 deploy:
   provider: npm
   email: npm@scispike.com
+  skip_cleanup: true
   on:
     tags: true
     repo: SciSpike/nodejs-support
