@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # MIT License
 #
@@ -81,14 +81,8 @@ case "$RELEASE_LEVEL" in
     ;;
 esac
 
-FX=fx
-if ! which $FX; then
-  FX="docker run --rm -i matthewadams12/$FX $FX"
-fi
-MATCH=match
-if ! which $MATCH; then
-  MATCH="docker run --rm -i matthewadams12/$MATCH"
-fi
+FX="docker run --rm -i matthewadams12/fx fx"
+MATCH="docker run --rm -i matthewadams12/match"
 
 PACKAGE_JSON="${PACKAGE_JSON:-package.json}"
 echo "INFO: using package file: $PACKAGE_JSON"
@@ -251,7 +245,7 @@ if [ "$BRANCH" = "$MASTER" ]; then # this will be either an rc, resulting in a n
 
       applyChanges "bump to $NEXT_VERSION [skip ci]"
 
-      # return to release branch & prepare for next prerelease
+      # return to release branch & prepare for next prerelease release
       git checkout $NEW_RELEASE_BRANCH
       echo "INFO: checked out $NEW_RELEASE_BRANCH"
 
