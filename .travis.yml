@@ -3,7 +3,6 @@ node_js:
   - '10'
 before_deploy:
   - npm run make-distribution
-  - cd lib/main
 deploy:
   provider: npm
   email: npm@scispike.com
