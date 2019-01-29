@@ -94,6 +94,8 @@ describe('unit tests of CodedError', function () {
     expect(e.name).to.equal(SUBCODE)
     expect(e.code).to.equal(SUBCODE)
     expect(e.message).to.equal(`${SUBCODE}`)
+    expect(() => { throw new Sub() }).to.throw(Sub)
+    expect(() => { throw new Sub() }).to.throw(Super)
     log.error(e)
   })
 
