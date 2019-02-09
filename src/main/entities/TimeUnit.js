@@ -42,6 +42,8 @@ units.forEach(it => {
 TimeUnit.error = () => UnknownTimeUnitEnumError
 
 TimeUnit.of = it => {
+  if (it instanceof TimeUnit) return it
+
   let e
   if (typeof it === 'number') e = TimeUnit.enumValues[it]
   if (e) return e

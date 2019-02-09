@@ -32,6 +32,8 @@ DayOfWeek.prototype.prev = function (count = 1) {
 }
 
 DayOfWeek.of = it => {
+  if (it instanceof DayOfWeek) return it
+
   let e
   if (typeof it === 'number') e = DayOfWeek.enumValues[it]
   if (e) return e

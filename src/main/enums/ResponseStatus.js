@@ -15,6 +15,8 @@ ResponseStatus.initEnum([
 ResponseStatus.error = () => UnknownResponseStatusEnumError
 
 ResponseStatus.of = it => {
+  if (it instanceof ResponseStatus) return it
+
   let e
   if (typeof it === 'number') e = ResponseStatus.enumValues[it]
   if (e) return e
