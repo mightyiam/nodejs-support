@@ -39,6 +39,27 @@ class CodedError extends Error {
   }
 }
 
+const createNamedSuberror = ({ code, name, supererror }) => ({ [name]: class extends (supererror || CodedError) {
+  /**
+     * Constructs a new instance of this class.
+     *
+     * @param {Error} [cause] An optional cause of this error.
+     * @param {string} [msg] An optional message.
+     * @param {*} [info] An optional value of any kind.
+     * @param {string} [_n] An optional name for instances of this class; defaults to {@param _c}.
+     * @param {string} [_c] An optional code for instances of this class; defaults to the code value when the class was defined.
+     */
+  constructor ({ cause, msg, info, _n, _c } = {}) {
+    if (typeof arguments[0] === 'string') {
+      msg = arguments[0]
+    }
+    _c = _c || code
+    _n = _n || name || _c
+    super({ cause, msg, info, _c, _n })
+    this.message = message(_c, msg, cause)
+  }
+} })[name]
+
 /**
  * Defines a new error class.
  *
@@ -49,26 +70,7 @@ class CodedError extends Error {
 const defineErrorClass = ({ code, name, supererror }) => {
   if (!code) throw new Error('code is required')
 
-  const C = class extends (supererror || CodedError) {
-    /**
-     * Constructs a new instance of this class.
-     *
-     * @param {Error} [cause] An optional cause of this error.
-     * @param {string} [msg] An optional message.
-     * @param {*} [info] An optional value of any kind.
-     * @param {string} [_n] An optional name for instances of this class; defaults to {@param _c}.
-     * @param {string} [_c] An optional code for instances of this class; defaults to the code value when the class was defined.
-     */
-    constructor ({ cause, msg, info, _n, _c } = {}) {
-      if (typeof arguments[0] === 'string') {
-        msg = arguments[0]
-      }
-      _c = _c || code
-      _n = _n || name || _c
-      super({ cause, msg, info, _c, _n })
-      this.message = message(_c, msg, cause)
-    }
-  }
+  const C = createNamedSuberror({ code, name, supererror })
 
   /**
    * The symbolic error code of the class.
