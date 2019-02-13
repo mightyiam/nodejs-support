@@ -51,7 +51,7 @@ TimeUnit.of = it => {
   e = TimeUnit.enumValueOf(it && it.toString())
   if (e) return e
 
-  throw new UnknownTimeUnitEnumError(it)
+  throw new UnknownTimeUnitEnumError({ info: { value: it } })
 }
 
 module.exports = TimeUnit

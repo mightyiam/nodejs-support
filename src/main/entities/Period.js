@@ -71,7 +71,7 @@ class Period extends traits(Persistable) {
   }
 
   clone () {
-    return new Period(this._begin?.clone(), this._end?.clone())
+    return new Period(this._begin.clone(), this._end.clone())
   }
 
   get begin () {

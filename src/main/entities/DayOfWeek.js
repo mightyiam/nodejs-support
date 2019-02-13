@@ -41,7 +41,7 @@ DayOfWeek.of = it => {
   e = DayOfWeek.enumValueOf(it && it.toString())
   if (e) return e
 
-  throw new UnknownDayOfWeekEnumError(it)
+  throw new UnknownDayOfWeekEnumError({ info: { value: it } })
 }
 
 module.exports = DayOfWeek

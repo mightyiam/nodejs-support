@@ -24,7 +24,7 @@ ResponseStatus.of = it => {
   e = ResponseStatus.enumValueOf(it && it.toString())
   if (e) return e
 
-  throw new UnknownResponseStatusEnumError(it)
+  throw new UnknownResponseStatusEnumError({ info: { value: it } })
 }
 
 module.exports = ResponseStatus
