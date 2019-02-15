@@ -4,10 +4,13 @@ const _ = require('lodash')
 const bunyan = require('bunyan')
 const bunyaner = require('bunyaner')
 
-const log = (name, opts = {}) => bunyaner(bunyan.createLogger(
+const log = (name, bunyanOpts = {}, bunyanerOpts = {}) => bunyaner(bunyan.createLogger(
   _.merge({
     name,
-    serializers: bunyan.stdSerializers
-  }, opts)))
+    serializers: ('serializers' in bunyanerOpts) ? bunyanOpts.serializers : bunyan.stdSerializers
+  }, bunyanOpts)), {
+  forceWrap: ('forceWrap' in bunyanerOpts) ? bunyanerOpts.forceWrap : true,
+  wrapperKey: ('wrapperKey' in bunyanerOpts) ? bunyanerOpts.wrapperKey : undefined
+})
 
 module.exports = log
