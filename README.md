@@ -71,3 +71,30 @@ The methods it offers are the following:
 
 This module actually eats its own dog food, using this object to export directories and files contained under `src/main`.
 See `src/main/index.js` or `src/main/entities/index.js` for examples
+
+## `contexts`
+
+Contexts allow you to place information in a continuation-local storage space (like Java's thread-local storage).
+
+There two flavors to choose from: one based on [`cls-hooked`](https://www.npmjs.com/package/cls-hooked), and one based on [`zone.js`](https://www.npmjs.com/package/zone.js).
+Use whichever one you want to; the `Context` API is the same:
+* Run code in a context: `Context().run(() => { /* your code here */ }, { your: 'context', values: 'here')`
+* Set a value in a context: `Context().set('name', 'value')`
+* Get a value from a context: `Context().get('name')`
+
+Usage example:
+```javascript
+const Context = require('@scispike/nodejs-support').contexts.ClsHookedContext // or ZoneJsContext
+
+Context().run(() => { // uses the default context; pass a string name for a custom context
+  // Do whatever you want here.
+  // Context values are accessible anywhere in the sync or async call stack:
+  const foo = Context().get('foo') // returns 'bar'
+  
+  // You can set & get values with:
+  Context().set('baz', 'snafu')
+  const baz = Context().get('baz') // returns 'snafu'
+}, {
+  foo: 'bar' // puts the value 'bar' into the context at key 'foo'
+})
+```
