@@ -152,7 +152,7 @@ class Period extends traits(Persistable) {
    * @return {boolean}
    */
   containsMoment (m, inclusivity) {
-    if (!moment.isMoment(m) || !m.isValid()) throw new IllegalArgumentError(`m`)
+    if (!moment.isMoment(m) || !m.isValid()) return false
 
     inclusivity = inclusivity || '[)'
 

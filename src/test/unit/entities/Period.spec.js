@@ -98,4 +98,11 @@ describe('unit tests of Period', function () {
     a = new Period(moment('2018-01-01T00:00:00.000Z').utc(), moment('2018-01-01T00:00:00.001Z').utc())
     expect(a.length).to.equal(1)
   })
+
+  it('should return false for a non-moment', function () {
+    const container = new Period()
+    expect(container.containsMoment(undefined)).to.be.false()
+    expect(container.containsMoment(null)).to.be.false()
+    expect(container.containsMoment(moment())).to.be.true()
+  })
 })
