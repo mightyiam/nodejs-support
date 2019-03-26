@@ -6,7 +6,7 @@ const DEFAULT_CONTEXT_NAME = '__ZONE_JS_CONTEXT'
 const PROPERTIES = 'properties'
 const contexts = {}
 
-class ZoneContext {
+class ZoneJsContext {
   constructor (name) {
     this.name = name || DEFAULT_CONTEXT_NAME
     this._context = Zone.current.fork({ name: this.name, properties: { [PROPERTIES]: {} } })
@@ -28,4 +28,4 @@ class ZoneContext {
   }
 }
 
-module.exports = name => contexts[name || DEFAULT_CONTEXT_NAME] || (contexts[name || DEFAULT_CONTEXT_NAME] = new ZoneContext(name))
+module.exports = name => contexts[name || DEFAULT_CONTEXT_NAME] || (contexts[name || DEFAULT_CONTEXT_NAME] = new ZoneJsContext(name))
