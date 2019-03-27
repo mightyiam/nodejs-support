@@ -84,7 +84,7 @@ Use whichever one you want to; the `Context` API is the same:
 
 Usage example:
 ```javascript
-const Context = require('@scispike/nodejs-support').contexts.ClsHookedContext // or ZoneJsContext
+const Context = require('@scispike/nodejs-support').context.ClsHookedContext // or ZoneJsContext
 
 Context().run(() => { // uses the default context; pass a string name for a custom context
   // Do whatever you want here.
