@@ -95,4 +95,8 @@ describe('unit tests of DatePeriod', function () {
     expect(a.overlaps(b)).to.be.true()
     expect(a.equals(b)).to.be.true()
   })
+  it('should have a DatePeriod type', function () {
+    const a = new DatePeriod(moment.utc('2018-01-01'), moment.utc('2018-01-04'))
+    expect(a.type).to.equal('DatePeriod')
+  })
 })

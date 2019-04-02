@@ -12,6 +12,13 @@ class DatePeriod extends superclass(Period).expressing(Persistable) {
     return new DatePeriod(begin.clone(), begin.clone().add(days, TimeUnit.DAY.key))
   }
 
+  constructor (begin, end) {
+    super(...arguments)
+    this.begin = begin
+    this.end = end
+    this._type = 'DatePeriod'
+  }
+
   _checkBegin (value) {
     if (!value) return value
     value = moment.utc(value)
