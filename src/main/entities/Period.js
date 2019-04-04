@@ -59,11 +59,13 @@ class Period extends traits(Persistable) {
 
   _begin
   _end
+  _type
 
   constructor (begin, end) {
     super(...arguments)
     this.begin = begin
     this.end = end
+    this._type = 'Period'
   }
 
   equals (that) {
@@ -118,6 +120,10 @@ class Period extends traits(Persistable) {
   get length () {
     if (!this._begin || !this._end) return -1
     return this._end.valueOf() - this._begin.valueOf()
+  }
+
+  get type () {
+    return this._type
   }
 
   /**

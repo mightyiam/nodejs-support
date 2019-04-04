@@ -105,4 +105,8 @@ describe('unit tests of Period', function () {
     expect(container.containsMoment(null)).to.be.false()
     expect(container.containsMoment(moment())).to.be.true()
   })
+  it('should have a Period type', function () {
+    const a = new Period(moment.utc('2018-01-01'), moment.utc('2018-01-04'))
+    expect(a.type).to.equal('Period')
+  })
 })
