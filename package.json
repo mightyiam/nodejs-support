@@ -2,6 +2,20 @@
   "name": "@scispike/nodejs-support",
   "version": "1.1.0-rc.4",
   "description": "Node.js Development Support library",
+  "homepage": "https://github.com/SciSpike/nodejs-support#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SciSpike/nodejs-support.git"
+  },
+  "keywords": [
+    "entities",
+    "continuation-local-storage",
+    "enum",
+    "error",
+    "logging",
+    "utilities"
+  ],
+  "license": "MIT",
   "engines": {
     "node": ">=10.12.0"
   },
