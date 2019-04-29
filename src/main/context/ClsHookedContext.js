@@ -19,7 +19,7 @@ class ClsHookedContext {
   }
 
   run (fn, values = {}) {
-    return this._context.run(() => {
+    return this._context.runAndReturn(() => {
       Object.keys(values).forEach(key => this.set(key.toString(), values[key]))
       return fn()
     })

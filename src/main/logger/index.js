@@ -1,6 +1,9 @@
 'use strict'
 
-const _ = require('lodash')
+const _ = {
+  merge: require('lodash.merge')
+}
+
 const bunyan = require('bunyan')
 const bunyaner = require('bunyaner')
 
