@@ -82,6 +82,11 @@ Use whichever one you want to; the `Context` API is the same:
 * Set a value in a context: `Context().set('name', 'value')`
 * Get a value from a context: `Context().get('name')`
 
+>NOTE:
+If you are using `ZoneJsContext`, you must install `zone.js` and then `require('zone.js/dist/zone-node')` at the right time for your application.
+If you are using `ClsHookedContext`, you must install `cls-hooked` yourself.
+See this project's `package.json` `devDependencies` section for the versions of `cls-hooked` and `zone.js` was built against and try to install compatible ones.
+
 Usage example:
 ```javascript
 const Context = require('@scispike/nodejs-support').context.ClsHookedContext // or ZoneJsContext

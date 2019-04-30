@@ -1,7 +1,6 @@
 /* global Zone */
 'use strict'
 
-require('zone.js/dist/zone-node')
 const DEFAULT_CONTEXT_NAME = '__ZONE_JS_CONTEXT'
 const PROPERTIES = 'properties'
 const contexts = {}
