@@ -1,11 +1,11 @@
 'use strict'
 
-const cls = require('cls-hooked')
 const DEFAULT_CONTEXT_NAME = '__CLS_HOOKED_CONTEXT'
 const contexts = {}
 
 class ClsHookedContext {
   constructor (name) {
+    const cls = require('cls-hooked')
     this.name = name || DEFAULT_CONTEXT_NAME
     this._context = cls.getNamespace(this.name) || cls.createNamespace(this.name)
   }

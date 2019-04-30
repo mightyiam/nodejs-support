@@ -1,6 +1,8 @@
 /* global describe, it */
 'use strict'
 
+require('zone.js/dist/zone-node')
+
 const uuid = require('uuid/v4')
 const Context = require('../../../main/context/ZoneJsContext')
 
