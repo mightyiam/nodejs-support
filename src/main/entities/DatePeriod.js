@@ -4,7 +4,7 @@ const moment = require('moment-timezone')
 const { superclass } = require('mutrait')
 const Persistable = require('./Persistable')
 const Period = require('./Period')
-const TimeUnit = require('./TimeUnit')
+const TimeUnit = require('../enums/TimeUnit')
 const IllegalArgumentError = require('../errors/IllegalArgumentError')
 
 class DatePeriod extends superclass(Period).expressing(Persistable) {

@@ -5,8 +5,8 @@ const chai = require('chai')
 chai.use(require('dirty-chai'))
 const expect = chai.expect
 
-const DayOfWeek = require('../../../main').entities.DayOfWeek
-const Recurrence = require('../../../main').entities.Recurrence
+const DayOfWeek = require('../../../main/enums/DayOfWeek')
+const Recurrence = require('../../../main/entities/Recurrence')
 
 describe('unit tests of Recurrence', function () {
   it('should work', () => {

@@ -5,7 +5,7 @@ const chai = require('chai')
 chai.use(require('dirty-chai'))
 const expect = chai.expect
 
-const DayOfWeek = require('../../../main').entities.DayOfWeek
+const DayOfWeek = require('../../../main/enums/DayOfWeek')
 
 describe('unit tests of DayOfWeek', function () {
   it('should calculate next & prev correctly', () => {
@@ -100,6 +100,6 @@ describe('unit tests of DayOfWeek', function () {
     expect(DayOfWeek.of(2)).to.equal(DayOfWeek.MONDAY)
   })
   it('should fail to retrieve unknown enum', () => {
-    expect(() => DayOfWeek.of('BOGUS')).to.throw(DayOfWeek.error())
+    expect(() => DayOfWeek.of('BOGUS')).to.throw(DayOfWeek.$ERROR$)
   })
 })

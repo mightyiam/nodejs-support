@@ -3,7 +3,7 @@
 const moment = require('moment-timezone')
 const { traits } = require('mutrait')
 const Persistable = require('./Persistable')
-const TimeUnit = require('./TimeUnit')
+const TimeUnit = require('../enums/TimeUnit')
 const IllegalArgumentError = require('../errors/IllegalArgumentError')
 
 class Period extends traits(Persistable) {
