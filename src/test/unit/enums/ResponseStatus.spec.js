@@ -5,7 +5,7 @@ const chai = require('chai')
 chai.use(require('dirty-chai'))
 const expect = chai.expect
 
-const ResponseStatus = require('../../../main').enums.ResponseStatus
+const ResponseStatus = require('../../../main/enums/ResponseStatus')
 
 describe('unit tests of ResponseStatus', function () {
   it('should retrieve enum', () => {

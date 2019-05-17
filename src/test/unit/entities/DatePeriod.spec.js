@@ -7,7 +7,7 @@ const chai = require('chai')
 chai.use(require('dirty-chai'))
 const expect = chai.expect
 
-const DatePeriod = require('../../../main').entities.DatePeriod
+const DatePeriod = require('../../../main/entities/DatePeriod')
 const IllegalArgumentError = require('../../../main/errors/IllegalArgumentError')
 
 describe('unit tests of DatePeriod', function () {

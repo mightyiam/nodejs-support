@@ -6,7 +6,7 @@ chai.use(require('dirty-chai'))
 const expect = chai.expect
 
 const { traits } = require('mutrait')
-const Identifiable = require('../../../main').entities.Identifiable
+const Identifiable = require('../../../main/entities/Identifiable')
 
 describe('unit tests of Identifiable', function () {
   it('should work', () => {
