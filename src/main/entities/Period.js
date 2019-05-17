@@ -180,19 +180,10 @@ class Period extends traits(Persistable) {
   /**
    * Determines whether the given period overlaps, or begin & end moments overlap, this period.
    *
-   * @param beginOrPeriod {Period|moment} The period or begin `moment`.
-   * If a `moment`, `end` must also be a `moment`.
-   * @param end {moment|undefined} The end `moment` if `beginOrPeriod` is a `moment`, else undefined.
+   * @param period {Period} The period to check.
    * @return {boolean}
    */
-  overlaps (beginOrPeriod, end) {
-    let period
-    if (beginOrPeriod instanceof Period) {
-      period = beginOrPeriod
-    } else {
-      period = new Period(beginOrPeriod, end)
-    }
-
+  overlaps (period) {
     if (this._begin) {
       if (this._end) {
         return this.containsMoment(period._begin, '[)') || this.containsMoment(period._end, '(]') || period.containsPeriod(this)
