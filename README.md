@@ -103,3 +103,13 @@ Context().run(() => { // uses the default context; pass a string name for a cust
   foo: 'bar' // puts the value 'bar' into the context at key 'foo'
 })
 ```
+
+## `Enumeration`
+
+TODO
+
+* TL;DR:  `const BooleanValue = Enumeration.new( { name: 'BooleanValue', values: ['TRUE', 'FALSE'] } )`
+* Codification of pattern in `Enumeration.new()`
+* static `$ERROR$` property
+* `isEnumerationInstance`, `isEnumerationClass`, `isInstance` & `isClass`
+* Document breaking changes: `$ERROR$` replaces `error()`
