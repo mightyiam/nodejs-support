@@ -13,6 +13,6 @@ describe('unit tests of ResponseStatus', function () {
     expect(ResponseStatus.of(0)).to.equal(ResponseStatus.ERROR)
   })
   it('should fail to retrieve unknown enum', () => {
-    expect(() => ResponseStatus.of('BOGUS')).to.throw(ResponseStatus.error())
+    expect(() => ResponseStatus.of('BOGUS')).to.throw(ResponseStatus.$ERROR$)
   })
 })
