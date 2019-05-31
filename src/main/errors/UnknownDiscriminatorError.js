@@ -2,4 +2,4 @@
 
 const CodedError = require('./CodedError')
 
-module.exports = CodedError({ code: 'E_UNKNOWN_DISCRIMINATOR' })
+module.exports = CodedError({ name: 'UnknownDiscriminatorError' })

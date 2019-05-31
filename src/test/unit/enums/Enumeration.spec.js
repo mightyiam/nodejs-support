@@ -9,12 +9,6 @@ const Enumeration = require('../../../main/enums/Enumeration')
 const ClassNotExtendableError = require('../../../main/errors/ClassNotExtendableError')
 
 describe('unit tests of Enumeration', function () {
-  it('should convert camelCaseToSnakeCase', () => {
-    expect(Enumeration._camelCaseToSnake('FooBarBaz')).to.equal('foo_bar_baz')
-    expect(Enumeration._camelCaseToSnake('Foo')).to.equal('foo')
-    expect(Enumeration._camelCaseToSnake('foo')).to.equal('foo')
-  })
-
   it('should create a new enum', () => {
     const E = Enumeration.new({ name: 'BooleanValue', values: ['TRUE', 'FALSE'] })
     expect(E.TRUE).to.be.ok()

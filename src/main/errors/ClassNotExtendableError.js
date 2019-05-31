@@ -2,4 +2,4 @@
 
 const IllegalStateError = require('./IllegalStateError')
 
-module.exports = IllegalStateError.subclass({ code: 'E_CLASS_NOT_EXTENDABLE' })
+module.exports = IllegalStateError.subclass({ name: 'ClassNotExtendableError' })

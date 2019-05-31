@@ -2,6 +2,7 @@
 
 const { Enum } = require('enumify')
 const ClassNotExtendableError = require('../errors/ClassNotExtendableError')
+const camelCaseToUpperCaseSnake = require('../string-utils').camelCaseToUpperCaseSnake
 
 class Enumeration extends Enum {
   static isEnumerationInstance (it) {
@@ -21,7 +22,7 @@ class Enumeration extends Enum {
       info = null
     } = {}
   } = {}) {
-    code = code || `E_UNKNOWN_${Enumeration._camelCaseToSnake(name).toUpperCase()}_ENUM_VALUE`
+    code = code || `E_UNKNOWN_${camelCaseToUpperCaseSnake(name)}_ENUM_VALUE`
     const EnumError = require('../errors/UnknownEnumError').subclass({ code })
 
     const E = {
@@ -59,13 +60,6 @@ class Enumeration extends Enum {
     E.$ERROR$ = EnumError
 
     return E
-  }
-
-  static _camelCaseToSnake (it) {
-    return it
-      ?.toString()
-      ?.replace(/(^([A-Z]))/, (match, upper) => `${upper.toLowerCase()}`)
-      ?.replace(/([A-Z])/g, (match, upper) => `_${upper.toLowerCase()}`)
   }
 }
 

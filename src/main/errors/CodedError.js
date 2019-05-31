@@ -1,5 +1,7 @@
 'use strict'
 
+const { camelCaseToUpperCaseSnake, snakeToCamelCase } = require('../string-utils')
+
 /**
  * Formats an error message.
  *
@@ -47,9 +49,28 @@ class CodedError extends Error {
  * @param {*} [supererror] An optional superclass previously returned by this function.
  */
 const defineErrorClass = ({ code, name, supererror }) => {
-  if (!code) throw new Error('code is required')
+  if (!name && !code) throw new Error('name or code is required')
+  if (name && !code) code = `E_${camelCaseToUpperCaseSnake(name)}`.replace(/_ERROR$/, '')
+  if (code && !name) {
+    name = snakeToCamelCase(code.replace(/^E_/, ''))
+    if (!name.endsWith('Error')) name = `${name}Error`
+  }
 
-  const C = class extends (supererror || CodedError) {
+  const C = { [name]: class extends (supererror || CodedError) {
+    static isInstance (it) {
+      // if (it instanceof C) return true
+      if (!it) return it
+      if (it.name === name) return true
+
+      let proto = it.constructor
+      while (proto && proto.name !== 'CodedError') {
+        if (proto.name === name) return true
+        proto = Object.getPrototypeOf(proto)
+      }
+
+      return false
+    }
+
     /**
      * Constructs a new instance of this class.
      *
@@ -69,6 +90,7 @@ const defineErrorClass = ({ code, name, supererror }) => {
       this.message = message(_c, msg, cause)
     }
   }
+  }[name] // causes name of class to be value of name
 
   /**
    * The symbolic error code of the class.

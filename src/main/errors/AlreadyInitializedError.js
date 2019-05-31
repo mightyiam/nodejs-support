@@ -2,4 +2,4 @@
 
 const CodedError = require('./CodedError')
 
-module.exports = CodedError({ code: 'E_ALREADY_INITIALIZED' })
+module.exports = CodedError({ name: 'AlreadyInitializedError' })

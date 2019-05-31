@@ -2,4 +2,4 @@
 
 const CodedError = require('./CodedError')
 
-module.exports = CodedError({ code: 'E_OBJECT_NOT_FOUND' })
+module.exports = CodedError({ name: 'ObjectNotFoundError' })

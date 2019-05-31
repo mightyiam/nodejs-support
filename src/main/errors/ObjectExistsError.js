@@ -2,4 +2,4 @@
 
 const CodedError = require('./CodedError')
 
-module.exports = CodedError({ code: 'E_OBJECT_EXISTS' })
+module.exports = CodedError({ name: 'ObjectExistsError' })

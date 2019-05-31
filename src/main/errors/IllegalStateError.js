@@ -2,4 +2,4 @@
 
 const CodedError = require('./CodedError')
 
-module.exports = CodedError({ code: 'E_ILLEGAL_STATE' })
+module.exports = CodedError({ name: 'IllegalStateError' })

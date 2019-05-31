@@ -2,4 +2,4 @@
 
 const IllegalArgumentError = require('./IllegalArgumentError')
 
-module.exports = IllegalArgumentError.subclass({ code: 'E_UNKNOWN_ENUM' })
+module.exports = IllegalArgumentError.subclass({ name: 'UnknownEnumError' })
