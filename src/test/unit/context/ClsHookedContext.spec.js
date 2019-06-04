@@ -1,6 +1,10 @@
 /* global describe, it */
 'use strict'
 
+const chai = require('chai')
+chai.use(require('dirty-chai'))
+const expect = chai.expect
+
 const uuid = require('uuid/v4')
 const Context = require('../../../main/context/ClsHookedContext')
 
@@ -33,5 +37,11 @@ describe('ClsHookedTest', function () {
 
   it('should work with async/await', async function () {
     return tests.testContextValueAvailableInAsyncAwait(Context, uuid())
+  })
+
+  it('should give the same context when given the same name', async function () {
+    const name = uuid()
+    const context = Context(name)._context
+    expect(Context(name)._context).to.equal(context)
   })
 })
