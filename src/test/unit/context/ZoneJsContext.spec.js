@@ -3,6 +3,10 @@
 
 require('zone.js/dist/zone-node')
 
+const chai = require('chai')
+chai.use(require('dirty-chai'))
+const expect = chai.expect
+
 const uuid = require('uuid/v4')
 const Context = require('../../../main/context/ZoneJsContext')
 
@@ -35,5 +39,11 @@ describe('ZoneJsTest', function () {
 
   it('should work with async/await', async function () {
     return tests.testContextValueAvailableInAsyncAwait(Context, uuid())
+  })
+
+  it('should give the same context when given the same name', async function () {
+    const name = uuid()
+    const context = Context(name)._context.name
+    expect(Context(name)._context.name).to.equal(context)
   })
 })
