@@ -6,6 +6,7 @@ module.exports = Enumeration.new({
   name: 'ResponseStatus',
   values: [
     'ERROR',
-    'SUCCESS'
+    'SUCCESS',
+    'PARTIAL'
   ]
 })
