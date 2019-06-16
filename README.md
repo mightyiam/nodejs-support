@@ -1,6 +1,45 @@
 # `nodejs-support`
 This package contains various building blocks for use in Node.js-based applications.
 
+## `services`
+This folder contains various classes to help you write well-behaved services.
+
+### `ServiceSupport`
+This is a helper class that provides static methods to wrap functions in a try/catch in order to
+* ensure service methods always return success/failure information with payloads, and
+* prevent service methods from throwing.
+
+### `@returnsServiceResponse`
+This is a decorator-based aspect, based on [`@scispike/aspectify`](https://www.npmjs.com/package/@scispike/aspectify) & `ServiceSupport`, that allows you to simply _decorate_ a service method in order to ensure that it behaves as described above.
+Simply ensure that you are returning plain, ol' values (including objects, if desired), from your service methods.
+
+This aspect will wrap the service method's return value (`returnValue` below) into an object of the form
+```javascript
+{
+  data: returnValue,
+  meta: {
+    status: 'SUCCESS',
+    elapsedMillis: ...
+  }
+}
+```
+If your method `throw`s an `Error`, the aspect catches it and returns a response of the form
+```javascript
+{
+  error: {
+    name: ...,
+    message: ...,
+    code: ..., // if your error has a code property
+    info: ..., // if your error has an info property
+    stack: ..., // if you used @returnsServiceResponse({ includeStacktrace: true})
+  },
+  meta: {
+    status: 'FAILURE',
+    elapsedMillis: ...
+  }
+}
+```
+
 ## `entities`
 
 Usage example:
