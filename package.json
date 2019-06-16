@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "7.4.4",
+    "@scispike/aspectify": "0.2.0-rc.1",
     "bunyan": "1.8.12",
     "bunyaner": "1.1.0",
     "enumify": "1.0.4",
@@ -63,6 +64,7 @@
     "@babel/plugin-proposal-class-properties": "7.4.4",
     "@babel/plugin-proposal-decorators": "7.4.4",
     "@babel/plugin-proposal-optional-chaining": "7.2.0",
+    "@babel/plugin-proposal-throw-expressions": "7.2.0",
     "@babel/preset-env": "7.4.5",
     "@babel/register": "7.4.4",
     "acorn": "6.1.1",
@@ -81,7 +83,6 @@
   },
   "babel": {
     "sourceMaps": "inline",
-    "retainLines": true,
     "presets": [
       [
         "@babel/preset-env",
@@ -102,11 +103,17 @@
       [
         "@babel/plugin-proposal-decorators",
         {
-          "decoratorsBeforeExport": false
+          "legacy": true
         }
       ],
       [
-        "@babel/plugin-proposal-class-properties"
+        "@babel/plugin-proposal-class-properties",
+        {
+          "loose": true
+        }
+      ],
+      [
+        "@babel/plugin-proposal-throw-expressions"
       ]
     ]
   },
