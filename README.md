@@ -31,6 +31,7 @@ If your method `throw`s an `Error`, the aspect catches it and returns a response
     message: ...,
     code: ..., // if your error has a code property
     info: ..., // if your error has an info property
+    cause: ..., // recursive cause(s) error here if your error has a `cause` property
     stack: ..., // if you used @returnsServiceResponse({ includeStacktrace: true})
   },
   meta: {
