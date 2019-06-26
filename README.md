@@ -42,19 +42,31 @@ If your method `throw`s an `Error`, the aspect catches it and returns a response
 ```
 
 ## `entities`
+Contains some convenient entities that are expected to be persisted into some datastore.
+
+Usage example:
+```javascript
+const moment = require('moment-timezone')
+const Period = require('@scispike/nodejs-support/entities/Period')
+
+const period = new Period(moment().utc(), moment.utc().add(1, 'day'))
+// now use period methods
+```
+
+This folder contains
+* fundamental traits based on [`mutrait`](https://www.npmjs.com/package/mutrait) meant to be used by other `class`es,
+* fundamental `class`es that may be convenient in other parts of the stack.
+
+See the source for more information.
+
+## `enums`
+This folder convenient enumerations using a pattern that builds on [`enumify`](https://www.npmjs.com/package/enumify).
 
 Usage example:
 ```javascript
 const DayOfWeek = require('@scispike/nodejs-support').entities.DayOfWeek
 // ...use DayOfWeek.SUNDAY, etc
 ```
-
-This folder contains
-* convenient enumerations using a pattern that builds on [`enumify`](https://www.npmjs.com/package/enumify),
-* fundamental traits based on [`mutrait`](https://www.npmjs.com/package/mutrait) meant to be used by other `class`es,
-* fundamental `class`es that may be convenient in other parts of the stack.
-
-See the source for more information.
 
 ## `errors`
 
