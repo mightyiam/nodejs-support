@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "7.4.4",
-    "@scispike/aspectify": "0.2.0-rc.1",
+    "@scispike/aspectify": "1.0.0",
     "bunyan": "1.8.12",
     "bunyaner": "1.1.0",
     "enumify": "1.0.4",
