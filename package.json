@@ -52,7 +52,7 @@
     "bunyan": "1.8.12",
     "bunyaner": "1.1.0",
     "enumify": "1.0.4",
-    "lodash.merge": "4.6.1",
+    "lodash.merge": "4.6.2",
     "moment": "2.24.0",
     "moment-timezone": "0.5.25",
     "mutrait": "1.0.0",
