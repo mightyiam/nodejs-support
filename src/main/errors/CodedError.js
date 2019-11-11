@@ -56,22 +56,23 @@ const defineErrorClass = ({ code, name, supererror }) => {
     if (!name.endsWith('Error')) name = `${name}Error`
   }
 
-  const C = { [name]: class extends (supererror || CodedError) {
-    static isInstance (it) {
+  const C = {
+    [name]: class extends (supererror || CodedError) {
+      static isInstance (it) {
       // if (it instanceof C) return true
-      if (!it) return it
-      if (it.name === name) return true
+        if (!it) return it
+        if (it.name === name) return true
 
-      let proto = it.constructor
-      while (proto && proto.name !== 'CodedError') {
-        if (proto.name === name) return true
-        proto = Object.getPrototypeOf(proto)
+        let proto = it.constructor
+        while (proto && proto.name !== 'CodedError') {
+          if (proto.name === name) return true
+          proto = Object.getPrototypeOf(proto)
+        }
+
+        return false
       }
 
-      return false
-    }
-
-    /**
+      /**
      * Constructs a new instance of this class.
      *
      * @param {Error} [cause] An optional cause of this error.
@@ -80,16 +81,16 @@ const defineErrorClass = ({ code, name, supererror }) => {
      * @param {string} [_n] An optional name for instances of this class; defaults to {@param _c}.
      * @param {string} [_c] An optional code for instances of this class; defaults to the code value when the class was defined.
      */
-    constructor ({ cause, msg, info, _n, _c } = {}) {
-      if (typeof arguments[0] === 'string') {
-        msg = arguments[0]
+      constructor ({ cause, msg, info, _n, _c } = {}) {
+        if (typeof arguments[0] === 'string') {
+          msg = arguments[0]
+        }
+        _c = _c || code
+        _n = _n || name || _c
+        super({ cause, msg, info, _c, _n })
+        this.message = message(_c, msg, cause)
       }
-      _c = _c || code
-      _n = _n || name || _c
-      super({ cause, msg, info, _c, _n })
-      this.message = message(_c, msg, cause)
     }
-  }
   }[name] // causes name of class to be value of name
 
   /**

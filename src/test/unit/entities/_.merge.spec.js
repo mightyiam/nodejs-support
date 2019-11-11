@@ -20,6 +20,7 @@ describe('_.merge', () => {
         xSet++
         this._x = value
       }
+
       get x () {
         xGet++
         return this._x
@@ -31,6 +32,7 @@ describe('_.merge', () => {
         itSet++
         this._it = value
       }
+
       get it () {
         itGet++
         return this._it
@@ -77,6 +79,7 @@ describe('_.merge', () => {
         xSet++
         this._x = value
       }
+
       get x () {
         xGet++
         return this._x
@@ -88,6 +91,7 @@ describe('_.merge', () => {
         itSet++
         this._it = value
       }
+
       get it () {
         itGet++
         return this._it
@@ -132,6 +136,7 @@ describe('_.merge', () => {
         xSet++
         this._x = value
       }
+
       get x () {
         return this._x
       }
@@ -143,10 +148,12 @@ describe('_.merge', () => {
         this.it = it
         this.x = x
       }
+
       set it (value) {
         itSet++
         this._it = value
       }
+
       get it () {
         return this._it
       }
@@ -195,6 +202,7 @@ describe('_.merge', () => {
         xSet++
         this._x = value
       }
+
       get x () {
         return this._x
       }
@@ -206,10 +214,12 @@ describe('_.merge', () => {
         this.it = it
         this.x = x
       }
+
       set it (value) {
         itSet++
         this._it = value
       }
+
       get it () {
         return this._it
       }

@@ -12,7 +12,7 @@ const IllegalArgumentError = require('../../../main/errors/IllegalArgumentError'
 
 describe('unit tests of Period', function () {
   it('should disallow invalid states', () => {
-    let p = new Period(moment('2018-01-01T00:00Z').utc(), moment('2018-01-01T01:00Z').utc())
+    const p = new Period(moment('2018-01-01T00:00Z').utc(), moment('2018-01-01T01:00Z').utc())
     expect(() => { p.begin = p.end.add(1, 'minute') }).to.throw(IllegalArgumentError)
     expect(() => { p.end = p.begin.add(-1, 'minute') }).to.throw(IllegalArgumentError)
   })

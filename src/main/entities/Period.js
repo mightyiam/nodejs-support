@@ -43,7 +43,7 @@ class Period extends traits(Persistable) {
   static contain (container, candidate) {
     if (candidate instanceof Period) return container.containsPeriod(candidate)
     if (moment.isMoment(candidate)) return container.containsMoment(candidate)
-    throw new IllegalArgumentError(`candidate`)
+    throw new IllegalArgumentError('candidate')
   }
 
   /**
@@ -133,7 +133,7 @@ class Period extends traits(Persistable) {
    * @return {boolean}
    */
   containsPeriod (that) {
-    if (!that) throw new IllegalArgumentError(`that`)
+    if (!that) throw new IllegalArgumentError('that')
 
     if (that._begin) {
       if (that._end) {
